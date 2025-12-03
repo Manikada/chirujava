@@ -124,7 +124,7 @@ Check that Nginx and Postgres work there as well.
 III. Expected Output:
 The same services run on the new machine without changes.
  
-4.Networking and persistent storage
+4.Networking and  ersistent storage
 Task:
 I. Update your docker-compose.yml to add a custom network and volume:
  
