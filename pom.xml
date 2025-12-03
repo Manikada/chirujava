@@ -1,18 +1,5 @@
-LAB ACTION PLAN FOR WEEK 6
-Objectives:
-Students will able to:
-· Learn how to define and run multiple interdependent services (e.g., web server, database) in a single configuration file.
-· Gain skills in writing and interpreting docker-compose.yml files for service setup.
-· Deploy the same setup across different machines without manual configuration.
-· Configure container networking and persistent storage within Compose.
-· Reduce setup time and enable faster iteration during application development.
-Students will perform Hands-on running multi container applications using docker compose and make document that include the execution of each step along with scenario-based question solutions after completing the tasks.
-What is Docker Compose?
-Docker Compose is a tool used to define and run multi-container Docker applications. It allows you to define services, networks, and volumes that your application needs, all in a single file. This makes it easier to manage complex applications that require multiple containers (e.g., a web server and a database).
-Structure of a Docker Compose File
-A Docker Compose file is written in YAML (YAML Ain't Markup Language), a human-readable data format used for configuration. In the Docker context, it helps define the services, networks, and volumes needed for an application.
-Basic Components of a Docker Compose YAML File
-1. Version: Specifies which version of the Docker Compose file format you're using. Each version comes with its own set of features.
+
+1. Version: Specifies which version of the __ file format you're using. Each version comes with its own set of features.
 version: '3.8'
  
 2. Services: This section defines all the containers you want to run for your application. Each service represents a container (like a web server or database).
@@ -22,15 +9,6 @@ o Ports: Ports to map between the container and your host machine.
 o Environment: Environment variables required by the service.
 o Dependencies: Which other services a container depends on.
 Example:
-services:
-  web:
-    image: nginx
-    ports:
-      - "8060:80"
-  db:
-    image: tomee
-    ports:
-      - "8050:8080"
  
 3. Networks: Define networks to allow different services to communicate with each other. Docker Compose automatically creates a default network if not specified.
  
@@ -39,7 +17,9 @@ services:
 Example Docker Compose File (Simple)
 Here’s a basic example of a Docker Compose file that runs WordPress and MySQL together:
 version: '3.8'  # Docker Compose file format version
- 
+
+
+
 services:
   wordpress:  # WordPress service
     image: wordpress:latest
@@ -223,24 +203,139 @@ docker compose up --build
 VI. Expected Output:
 New message appears instantly after rebuild.
  
-Scenario based Questions:
-1. You have two applications — a Node.js backend and a Python script that handles scheduled jobs. You're considering running both inside the same container. Should you run multiple applications in the same Docker container?
-2. You have a Flask API and an Nginx server. You want to run both containers on the same host and expose them on ports 5000 and 80 respectively. How can you expose both applications from different containers?
-3. You want to run a React frontend, an Express.js backend and MongoDB – all together.
-How do you run and manage all three together?
-4. You try to run two containers that both expose port 8080 on the host.
-What happens, and how can you run both apps?
-5. You updated some code and want to restart your frontend, backend, and DB containers quickly. What is the easiest way to restart all services?
-6. Your frontend has a new release, but you don’t want to restart the backend or DB.
-How can you update and rebuild only the frontend container?
-7. Tomcat is listening on port 8080, but you get a "Connection Refused" error in the browser. Why?
-8. You're not sure which container is using port 3000. How do you check?
-9. How do you stop and clean up your running Tomcat container and image?
-10.You want to share your app with a teammate. What do you do with the Docker image?
- 
-Conclusion:
-Docker Compose simplifies multi-container application management by allowing developers to define, configure, and run services in a single YAML file. It streamlines deployment, ensures consistent environments, and reduces manual setup, making it an essential tool for orchestrating complex, container-based applications efficiently.
- 
- 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Freelance Job Board</title>
+  </head>
+  <body>
+    
+pipeline {
+agent any  // Agent: Defines the machine (or slave) that runs the tasks 
+   tools{
+        maven 'MAVEN-HOME'
+    }
+    stages {         //The script is divided into stages, each representing a specific step, like building,
+        stage('git repo & clean') {
+            steps {
+                //bat "rmdir  /s /q mavenjava"
+                bat "git clone provide your github link"
+                bat "mvn clean -f mavenjava"
+            }
+        }
+        stage('install') {
+            steps {
+                bat "mvn install -f mavenjava" #project name#
+            }
+        }
+        stage('test') {
+            steps {
+ bat "mvn test -f mavenjava"
+            }
+        }
+        stage('package') {
+            steps {
+                bat "mvn package -f mavenjava"
+            }
+        }
+    }
+}
+
+
+minikube start --driver=hyperv
+
+minikube start --driver=docker
+minikube start
+kubectl create deployment mynginx --image=nginx
+
+kubectl expose deployment mynginx --type=NodePort --port=80 --target-port=80
+kubectl scale deployment mynginx --replicas=4
+kubectl get service myngnix
+kubectl port-forward svc/mynginx 8081:80
+
+kubectl delete deployment mynginx
+kubectl delete service mynginx
+
+
+   
+
+Pull the Nagios Docker Image
+Open a terminal and run:
+
+docker pull jasonrivers/nagios:latest
+docker run --name nagiosdemo -p 8888:80 jasonrivers/nagios:latest
+docker stop nagiosdemo
+docker rm nagiosdemo
+
+    
+    docker pull redis
+docker run --name my-redis -d redis
+docker exec -it my-redis redis-cli
+SET name "Alice"
+GET name
+docker stop my-redis
+docker rm my-redis 
+
+    
+
+ Create a folder like C:\DockerProjects\Redis.
+o Open Git Bash and navigate to the folder:
+cd /c/DockerProjects/Redis
+
+    FROM redis:latest
+CMD ["redis-server"]
+
+     docker build -t redisnew  .
+docker run --name myredisnew -d redisnew
+docker ps
+docker stop myredisnew
+docker login
+docker ps -a
+ docker commit 0e993d2009a1 budarajumadhurika/redis1 
+// Note 0e993d2009a1 is container id of myredisnew
+ docker push budarajumadhurika/redis1
+ docker rm 0e993d2009a1
+
+
+
+ngrok config add-authtoken 34ejJvRYKqtjvBUEYEnxudIbpb7_33i6pYx8BJ2cZ1TpwasWq
+ngrok http 8080
+
+
+    
+icacls "C:\path\to\your-key.pem" /inheritance:r
+icacls "C:\path\to\your-key.pem" /grant:r "$($env:USERNAME):(R)"
+
+
+AWS:    
+sudo apt update 
+    sudo apt-get install docker.io
+    
+    sudo docker build -t mymaven .
+    sudo docker run -d -p 9090:8080 mymaven
+
+    FROM tomcat:9-jdk11
+    COPY **/*.war /usr/local/tomcat/webapps/
+
+   
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
 
